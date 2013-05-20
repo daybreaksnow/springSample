@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+  http://www.springframework.org/schema/beans/spring-beans-2.0.xsd ">
+
+  <bean id="sampleBean"
+    class="spring.sample.SampleBean">
+    <!-- 文字列セット -->
+    <property name="sampleString" value="hoge"/>
+
+    <!-- longセット -->
+    <property name="sampleLong" value="1"/>
+
+    <!-- BigDecimalセット -->
+    <property name="sampleBigDecimal" value="1.123456"/>
+
+    <!-- BigDecimalセット(明示的にコンストラクタ呼び出し) -->
+    <property name="sampleBigDecimalNew" >
+     <bean class="java.math.BigDecimal" >
+      <constructor-arg>
+       <value>10.5</value>
+      </constructor-arg>
+     </bean>
+    </property>
+
+    <!-- リスト -->
+    <property name="sampleStringList">
+      <list>
+       <value>piyo</value>
+       <value>fuga</value>
+      </list>
+	</property>
+
+	<!-- すでに作成してあるBeanを利用 -->
+    <property name="sampleSubBeanShare" ref="sampleSubBeanShare"/>
+
+	<!-- beanを作成してセット -->
+    <property name="sampleSubBean" >
+     <bean class="spring.sample.SampleSubBean">
+       <property name="name" value="inner"/>
+     </bean>
+    </property>
+  </bean>
+
+  <bean id="sampleSubBeanShare" class="spring.sample.SampleSubBean">
+    <property name="name" value="share" />
+  </bean>
+</beans>
